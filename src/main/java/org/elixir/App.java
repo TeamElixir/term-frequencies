@@ -49,7 +49,7 @@ public class App {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.trim().length() > 2) {
-                    words.add(line.trim());
+                    words.add(line.trim().toLowerCase());
                 }
             }
         } catch (IOException e) {
