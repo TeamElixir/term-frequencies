@@ -23,13 +23,15 @@ public class App {
         System.out.println("Size: " + allWords.size());
         System.out.println("unique words: " + set.size());
 
+        int i = 0;
         for (String s : set) {
+            if (i % 100 == 0) {
+                System.out.println(i);
+            }
             int frequency = Collections.frequency(allWords, s);
             Word w = new Word(s, frequency);
             boolean inserted = WordsController.insertWord(w);
-//            if (inserted) {
-//                System.out.println("Inserted: " + s);
-//            }
+            i++;
         }
     }
 
