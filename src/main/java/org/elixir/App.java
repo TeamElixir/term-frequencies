@@ -34,14 +34,16 @@ public class App {
     }
 
     private static ArrayList<String> getWordsOfCase(int n) {
-        String directory = "StopWordsRemovedCases";
-        String filePath = new File("").getPath() + directory + File.separator + n + ".txt";
+        String directory = File.separator + "StopWordsRemovedCases";
+
+        InputStream in = App.class.getResourceAsStream(directory + File.separator + n + ".txt");
+
         BufferedReader br = null;
 
         ArrayList<String> words = new ArrayList<String>();
 
         try {
-            br = new BufferedReader(new FileReader(new File(filePath)));
+            br = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.trim().length() > 2) {
