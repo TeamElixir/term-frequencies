@@ -5,7 +5,9 @@ import org.elixir.models.Word;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class WordsController {
     private static Connection conn = DBCon.getConnection();
@@ -23,5 +25,32 @@ public class WordsController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static ArrayList<Word> getAllWords() {
+        ArrayList<Word> words = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM " + Word.TABLE_NAME;
+
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String word = rs.getString("word");
+                int frequency = rs.getInt("frequency");
+
+                Word w = new Word(word, frequency);
+                w.setId(id);
+                words.add(w);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return words;
     }
 }

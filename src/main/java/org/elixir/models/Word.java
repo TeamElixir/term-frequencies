@@ -2,6 +2,7 @@ package org.elixir.models;
 
 public class Word {
     public static final String TABLE_NAME = "words";
+    private int id;
     private String word;
     private int sentiment;
     private int frequency;
@@ -15,6 +16,14 @@ public class Word {
     public Word(String word, int frequency) {
         this.word = word;
         this.frequency = frequency;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getWord() {
