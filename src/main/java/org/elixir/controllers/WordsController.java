@@ -53,4 +53,30 @@ public class WordsController {
 
         return words;
     }
+
+    public static boolean updateMaxTermDocumentOfWord(Word word) {
+        String query = "UPDATE " + Word.TABLE_NAME +
+                " SET maxDocumentFrequency = ? WHERE id = ?";
+
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, word.getMaxDocumentFrequency());
+            ps.setInt(2, word.getId());
+            ps.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
