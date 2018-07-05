@@ -11,8 +11,8 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        // insertAllWordsToDB();
-
+//        insertAllWordsToDB();
+        removeCJVanStopWords();
     }
 
     // TODO: complete the functionality
@@ -83,20 +83,20 @@ public class App {
     // insert all words to database
     private static void insertAllWordsToDB() {
         ArrayList<String> allWords = new ArrayList<String>();
-        for (int i = 1; i <= 2500; i++) {
+        for (int i = 1; i <= 231; i++) {
             System.out.println("Processing: " + i);
             ArrayList<String> wordsOfCase = getWordsOfCase(i);
             allWords.addAll(wordsOfCase);
         }
 
-        Set<String> set = new HashSet<String>(allWords);
+        Set<String> set = new HashSet<>(allWords);
 
         System.out.println("Size: " + allWords.size());
         System.out.println("Unique words: " + set.size());
 
         int i = 0;
         for (String s : set) {
-            if (i % 100 == 0) {
+            if (i % 10 == 0) {
                 // running indicator
                 System.out.println(i);
             }
@@ -135,7 +135,7 @@ public class App {
 
     // get the words of the case specified by the case number
     private static ArrayList<String> getWordsOfCase(int n) {
-        String directory = File.separator + "StopWordsRemovedCases";
+        String directory = File.separator + "StopWordsRemovedCriminalCases";
 
         InputStream in = App.class.getResourceAsStream(directory + File.separator + n + ".txt");
 
