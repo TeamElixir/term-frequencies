@@ -36,6 +36,7 @@ public class App {
         System.out.println("Stopwords list size: " + cjVanStopWordsList.size());
         for (Word w : allWords) {
             if (cjVanStopWordsList.contains(w.getWord())) {
+                // stopword found
                 continue;
             }
             newWords.add(w);
@@ -103,6 +104,9 @@ public class App {
             int frequency = Collections.frequency(allWords, s);
             Word w = new Word(s, frequency);
             boolean inserted = WordsController.insertWord(w);
+            if (!inserted) {
+                System.out.println("Insertion failed: " + w.getWord());
+            }
             i++;
         }
     }
